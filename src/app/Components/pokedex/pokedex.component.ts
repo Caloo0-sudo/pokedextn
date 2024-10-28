@@ -1,14 +1,40 @@
-import { Component, Input, input } from '@angular/core';
-import { __importDefault } from 'tslib';
+import { Component, Input, OnChanges } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { PokemonModel } from '../../Models/Pokemon';
 
 @Component({
   selector: 'app-pokedex',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './pokedex.component.html',
-  styleUrl: './pokedex.component.css'
+  styleUrls: ['./pokedex.component.css']
 })
-export class PokedexComponent {
-   @Input({required:true}) imageUrl: string = ' ';
+export class PokedexComponent implements OnChanges {
+  @Input() pokemon?: PokemonModel;
+  @Input() imageUrl: string = '';
 
+  isLoading: boolean = true;
+  showShineEffect: boolean = false;
+
+  ngOnChanges() {
+    if (this.pokemon) {
+      this.isLoading = true;
+      this.triggerShineEffect();
+    }
+  }
+
+  onImageLoad() {
+    this.isLoading = false;
+  }
+
+  triggerShineEffect() {
+    this.showShineEffect = true;
+    setTimeout(() => {
+      this.showShineEffect = false;
+    }, 2000);
+  }
+
+  getTypeClass(type: string): string {
+    return `type-${type.toLowerCase()}`;
+  }
 }

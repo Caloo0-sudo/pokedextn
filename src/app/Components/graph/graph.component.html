@@ -1,26 +1,40 @@
-<div class="pokedex-view">
-    <!-- Encabezado con icono y título -->
-    <header class="header">
-        <img src="https://cdn-icons-png.flaticon.com/512/188/188987.png" 
-             alt="Pokeball Icon" class="icon">
-        <span class="title">Cute Pokédex</span>
-    </header>
+<div class="stats-container">
+    <div class="stat-item">
+        <div class="stat-label">
+            <span>HP</span>
+            <span>{{vidaPokemon}}</span>
+        </div>
+        <div class="stat-bar" [style.width.%]="vidaPokemon"></div>
+    </div>
 
-    <!-- Sección de botones de navegación -->
-    <nav class="nav-buttons">
-        <button class="nav-btn">← Prev</button>
-        <button class="nav-btn">Next →</button>
-    </nav>
+    <div class="stat-item">
+        <div class="stat-label">
+            <span>Ataque</span>
+            <span>{{ataquePokemon}}</span>
+        </div>
+        <div class="stat-bar" [style.width.%]="ataquePokemon"></div>
+    </div>
 
-    <!-- Contenedor principal de la Pokédex -->
-    <section class="pokedex">
-        <span class="point"></span>
-        <span class="point"></span>
-    </section>
+    <div class="stat-item">
+        <div class="stat-label">
 
-    <!-- Sección gráfica -->
-    <section class="graph">
-        <app-graph></app-graph>
-    </section>
-   
-</div>
+            <div class="stat-label">
+                <span>Defensa</span>
+                <span>{{defensaPokemon}}</span>
+            </div>
+            <div class="stat-bar" [style.width.%]="defensaPokemon"></div>
+        </div>
+
+        <div class="pokemon-info">
+            <div class="info-row">
+                <span class="info-label">ID:</span>
+                <span class="info-value">{{idPokemon}}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Tipo:</span>
+                <span class="info-value" [class]="'type-' + tipoPokemon.toLowerCase()">
+                    {{tipoPokemon}}
+                </span>
+            </div>
+        </div>
+    </div>
