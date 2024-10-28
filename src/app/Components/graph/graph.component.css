@@ -1,0 +1,120 @@
+/* Vista principal con bordes suaves y sombra */
+.pokedex-view {
+    max-width: 576px;
+    height: 100vh;
+    background-color: #FFC1E3; /* Fondo rosado */
+    border: 3px solid #F48FB1;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo del encabezado */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #AD1457;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Botones de navegación */
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.nav-btn {
+    background-color: #F8BBD0;
+    border: 2px solid #F48FB1;
+    border-radius: 15px;
+    padding: 10px 20px;
+    color: #880E4F;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.nav-btn:hover {
+    background-color: #F06292;
+    color: white;
+}
+
+/* Contenedor de la Pokédex */
+.pokedex {
+    width: 100%;
+    height: 100%;
+    background-color: #FFF1F8;
+    border-bottom-left-radius: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    position: relative;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Sección gráfica */
+.graph {
+    width: 100%;
+    height: 100%;
+    background-color: #FFEBF0;
+    border-top-right-radius: 50px;
+    padding: 20px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Puntos decorativos animados */
+.point {
+    position: absolute;
+    bottom: 10px;
+    background-color: #F06292;
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    animation: pulse 2s infinite;
+}
+
+.point:nth-child(1) {
+    left: calc(50% - 30px);
+}
+
+.point:nth-child(2) {
+    left: calc(50% + 30px);
+}
+
+/* Animación suave */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+

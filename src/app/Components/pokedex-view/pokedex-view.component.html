@@ -1,0 +1,36 @@
+<div class="pokedex-view">
+    <!-- Encabezado con icono de Pikachu -->
+    <header class="header">
+        <i class="fas fa-bolt icon"></i>
+        <span class="title">Pokédex</span>
+    </header>
+
+    <!-- Botones de Navegación -->
+    <nav class="nav-buttons">
+        <button class="nav-btn">
+            <i class="fas fa-arrow-left"></i> Prev
+        </button>
+        <button class="nav-btn">
+            Next <i class="fas fa-arrow-right"></i>
+        </button>
+    </nav>
+
+    <!-- Sección Principal con Contenedor de Imagen -->
+    <section class="pokedex">
+        <div class="pokemon-container">
+            <app-pokedex [imageUrl]='"./assets/file.jpg"'> </app-pokedex>
+            <!-- Puntos debajo del Pokémon -->
+            <div class="points">
+                <span class="point"></span>
+                <span class="point"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Gráfica -->
+    <section class="graph">
+        <i class="fas fa-chart-bar graph-icon"></i>
+        <app-graph></app-graph>
+    </section>
+
+</div>

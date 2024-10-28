@@ -1,0 +1,14 @@
+.stats{
+    display:flex;
+    width:80%;
+    padding: 20px;
+}
+
+.health{
+    width: 10px;
+    height: 15px;
+    background-color: red;
+    border-radius: 5px;
+    margin: 5px;
+
+}
