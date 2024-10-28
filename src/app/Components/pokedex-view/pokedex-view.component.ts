@@ -1,40 +1,49 @@
-import { Component, OnInit, CommonModule } from '@angular/core';
-import { PokemonModel } from '../../Models/Pokemon';
+import { Component } from '@angular/core';
+import { PokedexComponent } from '../pokedex/pokedex.component';
+import { GraphComponent } from '../graph/graph.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-pokedex-view',
   standalone: true,
-  imports: [PokedexComponent, GraphComponent,CommonModule],
+  imports: [PokedexComponent, GraphComponent, CommonModule],
   templateUrl: './pokedex-view.component.html',
-  styleUrl: './pokedex-view.component.css'
+  styleUrls: ['./pokedex-view.component.css']
 })
-export class PokedexViewComponent implements OnInit {
-  pokemonList: PokemonModel[] = [];
-  currentIndex: number = 0;
-  currentPokemon?: PokemonModel;
+export class PokedexViewComponent {
+  currentPokemonId: number = 1;
+  maxPokemonId: number = 151; // Límite de la primera generación
+  baseImageUrl: string = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
 
-  ngOnInit() {
-    // Aquí puedes inicializar tu lista de Pokemon
-    this.pokemonList = [
-      new PokemonModel(1, 'Bulbasaur', 'assets/bulbasaur.png', 45, 49, 49, 'Planta'),
-      new PokemonModel(2, 'Charmander', 'assets/charmander.png', 39, 52, 43, 'Fuego'),
-      new PokemonModel(3, 'Squirtle', 'assets/squirtle.png', 44, 48, 65, 'Agua'),
-      // Añade más Pokemon aquí
-    ];
-    this.currentPokemon = this.pokemonList[0];
+  // Obtener la URL completa de la imagen
+  getPokemonImageUrl(): string {
+    return `${this.baseImageUrl}${this.currentPokemonId}.png`;
   }
 
-  prevPokemon() {
-    if (this.currentIndex > 0) {
-      this.currentIndex--;
-      this.currentPokemon = this.pokemonList[this.currentIndex];
+  prevPokemon(): void {
+    if (this.currentPokemonId > 1) {
+      this.currentPokemonId--;
+      this.loadPokemonData();
     }
   }
 
-  nextPokemon() {
-    if (this.currentIndex < this.pokemonList.length - 1) {
-      this.currentIndex++;
-      this.currentPokemon = this.pokemonList[this.currentIndex];
+  nextPokemon(): void {
+    if (this.currentPokemonId < this.maxPokemonId) {
+      this.currentPokemonId++;
+      this.loadPokemonData();
     }
+  }
+
+  loadPokemonData(): void {
+    console.log(`Cargando Pokémon #${this.currentPokemonId}`);
+    // Aquí puedes implementar la lógica para cargar los datos del Pokémon
+  }
+
+  isPrevDisabled(): boolean {
+    return this.currentPokemonId <= 1;
+  }
+
+  isNextDisabled(): boolean {
+    return this.currentPokemonId >= this.maxPokemonId;
   }
 }

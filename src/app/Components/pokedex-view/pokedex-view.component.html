@@ -1,29 +1,34 @@
 <div class="pokedex-view">
-    <div class="led-section">
-        <div class="led main"></div>
-        <div class="led red"></div>
-        <div class="led yellow"></div>
-        <div class="led green"></div>
-    </div>
+    <!-- Encabezado con icono de Pikachu -->
+    <header class="header">
+        <i class="fas fa-bolt icon"></i>
+        <span class="title">Pokédex</span>
+    </header>
 
-    <div class="screen">
-        <app-pokedex [imageUrl]="currentPokemon?.imagen || './assets/pokeball.png'"></app-pokedex>
-    </div>
-
-    <div class="info-section">
-        <h2>{{currentPokemon?.nombre || '???'}}</h2>
-        <p>No. {{currentPokemon?.id || '???'}}</p>
-        <p>Tipo: {{currentPokemon?.tipo || '???'}}</p>
-    </div>
-
-    <app-graph></app-graph>
-
-    <div class="nav-buttons">
-        <button class="nav-btn" (click)="prevPokemon()">
-            <i class="fas fa-chevron-left"></i> Anterior
+    <!-- Botones de Navegación -->
+    <nav class="nav-buttons">
+        <button class="nav-btn" (click)="prevPokemon()" [disabled]="isPrevDisabled()">
+            <i class="fas fa-arrow-left"></i> Prev
         </button>
-        <button class="nav-btn" (click)="nextPokemon()">
-            Siguiente <i class="fas fa-chevron-right"></i>
+        <button class="nav-btn" (click)="nextPokemon()" [disabled]="isNextDisabled()">
+            Next <i class="fas fa-arrow-right"></i>
         </button>
-    </div>
+    </nav>
+
+    <!-- Sección Principal con Contenedor de Imagen -->
+    <section class="pokedex">
+        <div class="pokemon-container">
+            <app-pokedex [imageUrl]="getPokemonImageUrl()"></app-pokedex>
+            <div class="points">
+                <span class="point"></span>
+                <span class="point"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Gráfica -->
+    <section class="graph">
+        <i class="fas fa-chart-bar graph-icon"></i>
+        <app-graph></app-graph>
+    </section>
 </div>

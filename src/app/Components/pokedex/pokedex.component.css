@@ -115,3 +115,12 @@
         left: 200%;
     }
 }
+
+img {
+    width: 200px;
+    /* o el tamaño que prefieras */
+    height: 200px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    /* para sprites pixelados */
+}

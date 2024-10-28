@@ -1,40 +1,40 @@
-<div class="stats-container">
-    <div class="stat-item">
-        <div class="stat-label">
-            <span>HP</span>
-            <span>{{vidaPokemon}}</span>
+<div class="graph-container">
+    <!-- Información del Pokémon -->
+    <div class="pokemon-info">
+        <div class="pokemon-header">
+            <span class="pokemon-id">{{idPokemon}}</span>
+            <h2 class="pokemon-name">{{nombrePokemon}}</h2>
+            <span class="pokemon-type">{{tipoPokemon}}</span>
         </div>
-        <div class="stat-bar" [style.width.%]="vidaPokemon"></div>
-    </div>
 
-    <div class="stat-item">
-        <div class="stat-label">
-            <span>Ataque</span>
-            <span>{{ataquePokemon}}</span>
-        </div>
-        <div class="stat-bar" [style.width.%]="ataquePokemon"></div>
-    </div>
-
-    <div class="stat-item">
-        <div class="stat-label">
-
-            <div class="stat-label">
-                <span>Defensa</span>
-                <span>{{defensaPokemon}}</span>
+        <!-- Estadísticas -->
+        <div class="stats-container">
+            <!-- Vida -->
+            <div class="stat-item">
+                <span class="stat-label">HP</span>
+                <div class="stat-bar">
+                    <div class="stat-fill" [style.width.%]="vidaPokemon"></div>
+                </div>
+                <span class="stat-value">{{vidaPokemon}}</span>
             </div>
-            <div class="stat-bar" [style.width.%]="defensaPokemon"></div>
-        </div>
 
-        <div class="pokemon-info">
-            <div class="info-row">
-                <span class="info-label">ID:</span>
-                <span class="info-value">{{idPokemon}}</span>
+            <!-- Ataque -->
+            <div class="stat-item">
+                <span class="stat-label">ATK</span>
+                <div class="stat-bar">
+                    <div class="stat-fill" [style.width.%]="ataquePokemon"></div>
+                </div>
+                <span class="stat-value">{{ataquePokemon}}</span>
             </div>
-            <div class="info-row">
-                <span class="info-label">Tipo:</span>
-                <span class="info-value" [class]="'type-' + tipoPokemon.toLowerCase()">
-                    {{tipoPokemon}}
-                </span>
+
+            <!-- Defensa -->
+            <div class="stat-item">
+                <span class="stat-label">DEF</span>
+                <div class="stat-bar">
+                    <div class="stat-fill" [style.width.%]="defensaPokemon"></div>
+                </div>
+                <span class="stat-value">{{defensaPokemon}}</span>
             </div>
         </div>
     </div>
+</div>

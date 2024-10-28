@@ -1,121 +1,133 @@
+/* Vista Principal */
 .pokedex-view {
-    max-width: 400px;
-    height: 600px;
-    background-color: #DC0A2D;
+    max-width: 576px;
+    height: 100vh;
+    background-color: #FFC1E3;
+    /* Fondo de la Pokédex */
+    border: 3px solid #F48FB1;
+    /* Borde de la Pokédex */
     border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
-    box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.3);
+    gap: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     position: relative;
-    overflow: hidden;
 }
 
-/* Detalles de la Pokédex */
+/* Encabezado */
 .header {
-    background-color: #FB1B1B;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 20px;
     display: flex;
     align-items: center;
-}
-
-.led-section {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    display: flex;
     gap: 10px;
 }
 
-.led {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 2px solid #fff;
+.icon {
+    font-size: 2rem;
+    color: #FFCA28;
 }
 
-.led.main {
-    background: radial-gradient(#85BDFE, #0945C4);
-    animation: glow 1.5s infinite;
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #AD1457;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.led.red {
-    background-color: #FF0000;
-}
-
-.led.yellow {
-    background-color: #FFD700;
-}
-
-.led.green {
-    background-color: #00FF00;
-}
-
-.screen {
-    background-color: #98CB98;
-    border: 20px solid #DEDEDE;
-    border-radius: 15px;
-    height: 300px;
-    margin: 20px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.pokemon-display {
-    width: 200px;
-    height: 200px;
-    animation: float 3s infinite ease-in-out;
-}
-
-/* Botones de navegación */
+/* Botones de Navegación */
 .nav-buttons {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 10px 0;
 }
 
 .nav-btn {
-    background-color: #0075BE;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 30px;
-    font-size: 16px;
+    background-color: #F8BBD0;
+    border: 2px solid #F48FB1;
+    border-radius: 15px;
+    padding: 10px 20px;
+    color: #880E4F;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 0 #003A5E;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-.nav-btn:active {
-    transform: translateY(4px);
-    box-shadow: none;
+.nav-btn:hover:not([disabled]) {
+    background-color: #F06292;
+    color: white;
 }
 
-/* Animaciones */
-@keyframes glow {
+/* Contenedor del Pokémon y Puntos */
+.pokemon-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background-color: #FFF1F8;
+    /* Fondo del contenedor del Pokémon */
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-    0%,
-    100% {
-        box-shadow: 0 0 20px #85BDFE;
+/* Puntos Debajo del Pokémon */
+.points {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.point {
+    background-color: #F06292;
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    animation: pulse 2s infinite;
+}
+
+/* Sección Gráfica */
+.graph {
+    width: 100%;
+    height: 100%;
+    background-color: #FFEBF0;
+    /* Fondo de la sección gráfica */
+    border-top-right-radius: 50px;
+    padding: 20px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Icono de la gráfica */
+.graph-icon {
+    font-size: 2.5rem;
+    color: #AD1457;
+    margin-right: 10px;
+}
+
+/* Animación suave para los puntos */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
     }
 
     50% {
-        box-shadow: 0 0 40px #85BDFE;
+        transform: scale(1.2);
     }
-}
 
-@keyframes float {
-
-    0%,
     100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-20px);
+        transform: scale(1);
     }
 }

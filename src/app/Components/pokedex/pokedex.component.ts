@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, Output, OnChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PokemonModel } from '../../Models/Pokemon';
 
@@ -10,8 +10,8 @@ import { PokemonModel } from '../../Models/Pokemon';
   styleUrls: ['./pokedex.component.css']
 })
 export class PokedexComponent implements OnChanges {
-  @Input() pokemon?: PokemonModel;
   @Input() imageUrl: string = '';
+  @Output() pokemon?: PokemonModel;
 
   isLoading: boolean = true;
   showShineEffect: boolean = false;
