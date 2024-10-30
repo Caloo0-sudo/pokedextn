@@ -21,22 +21,16 @@ export class PokedexViewComponent implements OnInit {
     this.loadPokemonData(this.currentPokemonId);
   }
 
-  loadPokemonData(id: number) {
-    this.isLoading = true;
-    // Aquí deberías hacer una llamada a un servicio para obtener los datos del Pokémon
-    // Por ahora, simularemos la carga con un timeout
-    setTimeout(() => {
-      this.currentPokemon = new PokemonModel(
-        id,
-        `Pokemon ${id}`,
-        `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
-        Math.floor(Math.random() * 100) + 50,
-        Math.floor(Math.random() * 100) + 50,
-        Math.floor(Math.random() * 100) + 50,
-        ['Normal', 'Fire', 'Water', 'Grass', 'Electric'][Math.floor(Math.random() * 5)]
-      );
-      this.isLoading = false;
-    }, 1000);
+  loadPokemonData(): void {
+  this.currentPokemon = new PokemonModel(
+    this.currentPokemonId,
+    this.getPokemonName(this.currentPokemonId),
+    this.getPokemonImageUrl(),
+    Math.floor(Math.random() * 100) + 50, // HP
+    Math.floor(Math.random() * 80) + 40,  // ATK
+    Math.floor(Math.random() * 70) + 30,  // DEF
+    this.getPokemonType(this.currentPokemonId)
+  );
   }
 
   prevPokemon() {
