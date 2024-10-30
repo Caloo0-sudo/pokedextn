@@ -13,12 +13,12 @@ export class PokedexComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.pokemon) {
-      this.isLoading = true; // Iniciar la carga al recibir un nuevo Pokémon
+      this.isLoading = true;
     }
   }
 
   onImageLoad() {
-    this.isLoading = false; // Finalizar la carga cuando la imagen se carga
+    this.isLoading = false;
   }
 
   getStat(stat: string): number {
@@ -37,4 +37,10 @@ export class PokedexComponent implements OnChanges {
   getStatPercentage(stat: string): number {
     const value = this.getStat(stat);
     const maxStat = 255; // Máximo valor posible de estadística
-    return (value / maxStat) * 100
+    return (value / maxStat) * 100;
+  }
+
+  getTypeClass(type: string): string {
+    return `type-${type.toLowerCase()}`;
+  }
+}

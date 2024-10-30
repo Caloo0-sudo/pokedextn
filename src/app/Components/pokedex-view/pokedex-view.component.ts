@@ -11,68 +11,69 @@ export class PokedexViewComponent implements OnInit {
   currentPokemon?: PokemonModel;
   currentPokemonId: number = 1;
   maxPokemonId: number = 151;
+  isLoading: boolean = true;
   searchTerm: string = '';
-  isLoading: boolean = false;
   searchResults: PokemonModel[] = [];
 
-  // Lista de Pokémon predefinida para la búsqueda
-  pokemonList: PokemonModel[] = [
-    new PokemonModel(1, 'Bulbasaur', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png', 45, 49, 49, 'Grass'),
-    new PokemonModel(4, 'Charmander', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png', 39, 52, 43, 'Fire'),
-    new PokemonModel(7, 'Squirtle', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png', 44, 48, 65, 'Water'),
-    // Añade más Pokémon aquí...
-  ];
+  constructor() { }
 
   ngOnInit() {
-    this.loadPokemonData();
+    this.loadPokemonData(this.currentPokemonId);
   }
 
-  loadPokemonData() {
+  loadPokemonData(id: number) {
     this.isLoading = true;
-    // Simular carga de datos
+    // Aquí deberías hacer una llamada a un servicio para obtener los datos del Pokémon
+    // Por ahora, simularemos la carga con un timeout
     setTimeout(() => {
-      this.currentPokemon = this.pokemonList.find(p => p.getId() === this.currentPokemonId);
+      this.currentPokemon = new PokemonModel(
+        id,
+        `Pokemon ${id}`,
+        `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
+        Math.floor(Math.random() * 100) + 50,
+        Math.floor(Math.random() * 100) + 50,
+        Math.floor(Math.random() * 100) + 50,
+        ['Normal', 'Fire', 'Water', 'Grass', 'Electric'][Math.floor(Math.random() * 5)]
+      );
       this.isLoading = false;
-    }, 500);
-  }
-
-  onSearch() {
-    if (!this.searchTerm.trim()) {
-      this.searchResults = [];
-      return;
-    }
-
-    this.searchResults = this.pokemonList.filter(pokemon =>
-      pokemon.getNombre().toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
-  }
-
-  selectPokemon(pokemon: PokemonModel) {
-    this.currentPokemon = pokemon;
-    this.currentPokemonId = pokemon.getId();
-    this.searchResults = [];
-    this.searchTerm = '';
-  }
-
-  nextPokemon() {
-    if (this.currentPokemonId < this.maxPokemonId) {
-      this.currentPokemonId++;
-      this.loadPokemonData();
-    }
+    }, 1000);
   }
 
   prevPokemon() {
     if (this.currentPokemonId > 1) {
       this.currentPokemonId--;
-      this.loadPokemonData();
+      this.loadPokemonData(this.currentPokemonId);
+    }
+  }
+
+  nextPokemon() {
+    if (this.currentPokemonId < this.maxPokemonId) {
+      this.currentPokemonId++;
+      this.loadPokemonData(this.currentPokemonId);
     }
   }
 
   isPrevDisabled(): boolean {
-    return this.currentPokemonId <= 1 || this.isLoading;
+    return this.currentPokemonId <= 1;
   }
 
   isNextDisabled(): boolean {
-    return this.currentPokemonId >= this.maxPokemonId || this.isLoading;
+    return this.currentPokemonId >= this.maxPokemonId;
+  }
+
+  onSearch() {
+    // Aquí deberías implementar la lógica de búsqueda
+    // Por ahora, simularemos resultados
+    this.searchResults = [
+      new PokemonModel(25, 'Pikachu', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png', 35, 55, 40, 'Electric'),
+      new PokemonModel(4, 'Charmander', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png', 39, 52, 43, 'Fire')
+    ].filter(pokemon => pokemon.getNombre().toLowerCase().includes(this.searchTerm.toLowerCase()));
+  }
+
+  selectPokemon(pokemon: PokemonModel) {
+    this.currentPokemon = pokemon;
+    this.currentPokemonId = pokemon.getId();
+    this.searchTerm = '';
+    this.searchResults = [];
   }
 }
