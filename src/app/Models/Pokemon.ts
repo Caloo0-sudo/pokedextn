@@ -1,3 +1,4 @@
+// src/app/Models/Pokemon.ts
 export class PokemonModel {
     constructor(
         private id: number,
@@ -43,40 +44,6 @@ export class PokemonModel {
         return this.descripcion;
     }
 
-    // Setters...
-    setId(id: number): void {
-        this.id = id;
-    }
-
-    setNombre(nombre: string): void {
-        this.nombre = nombre;
-    }
-
-    setImagen(imagen: string): void {
-        this.imagen = imagen;
-    }
-
-    setVida(vida: number): void {
-        this.vida = vida;
-    }
-
-    setAtaque(ataque: number): void {
-        this.ataque = ataque;
-    }
-
-    setDefensa(defensa: number): void {
-        this.defensa = defensa;
-    }
-
-    setTipo(tipo: string): void {
-        this.tipo = tipo;
-    }
-
-    setDescripcion(descripcion: string): void {
-        this.descripcion = descripcion;
-    }
-
-    // Métodos de clase
     mostrarPokemon(): string {
         return `ID: ${this.id}, Nombre: ${this.nombre}, Tipo: ${this.tipo}, HP: ${this.vida}, ATK: ${this.ataque}, DEF: ${this.defensa}`;
     }

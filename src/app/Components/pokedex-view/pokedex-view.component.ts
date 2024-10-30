@@ -1,13 +1,9 @@
+// src/app/Components/pokedex-view/pokedex-view.component.ts
 import { Component, OnInit } from '@angular/core';
-import { PokedexComponent } from '../pokedex/pokedex.component';
-import { GraphComponent } from '../graph/graph.component';
-import { CommonModule } from '@angular/common';
 import { PokemonModel } from '../../Models/Pokemon';
 
 @Component({
   selector: 'app-pokedex-view',
-  standalone: true,
-  imports: [PokedexComponent, GraphComponent, CommonModule],
   templateUrl: './pokedex-view.component.html',
   styleUrls: ['./pokedex-view.component.css']
 })
@@ -15,65 +11,68 @@ export class PokedexViewComponent implements OnInit {
   currentPokemon?: PokemonModel;
   currentPokemonId: number = 1;
   maxPokemonId: number = 151;
-  baseImageUrl: string = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
-  pokemonName: string = '';
+  searchTerm: string = '';
+  isLoading: boolean = false;
+  searchResults: PokemonModel[] = [];
 
-  constructor() {
-    this.loadPokemonData();
-  }
+  // Lista de Pokémon predefinida para la búsqueda
+  pokemonList: PokemonModel[] = [
+    new PokemonModel(1, 'Bulbasaur', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png', 45, 49, 49, 'Grass'),
+    new PokemonModel(4, 'Charmander', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png', 39, 52, 43, 'Fire'),
+    new PokemonModel(7, 'Squirtle', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png', 44, 48, 65, 'Water'),
+    // Añade más Pokémon aquí...
+  ];
 
   ngOnInit() {
     this.loadPokemonData();
   }
 
-  getPokemonImageUrl(): string {
-    return `${this.baseImageUrl}${this.currentPokemonId}.png`;
+  loadPokemonData() {
+    this.isLoading = true;
+    // Simular carga de datos
+    setTimeout(() => {
+      this.currentPokemon = this.pokemonList.find(p => p.getId() === this.currentPokemonId);
+      this.isLoading = false;
+    }, 500);
   }
 
-  loadPokemonData(): void {
-    // Aquí simularemos datos por ahora, pero esto podría venir de una API
-    this.currentPokemon = new PokemonModel(
-      this.currentPokemonId,
-      this.getPokemonName(this.currentPokemonId),
-      this.getPokemonImageUrl(),
-      Math.floor(Math.random() * 100) + 50, // HP aleatorio entre 50-150
-      Math.floor(Math.random() * 80) + 40,  // ATK aleatorio entre 40-120
-      Math.floor(Math.random() * 70) + 30,  // DEF aleatorio entre 30-100
-      this.getPokemonType(this.currentPokemonId)
+  onSearch() {
+    if (!this.searchTerm.trim()) {
+      this.searchResults = [];
+      return;
+    }
+
+    this.searchResults = this.pokemonList.filter(pokemon =>
+      pokemon.getNombre().toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
 
-  prevPokemon(): void {
-    if (this.currentPokemonId > 1) {
-      this.currentPokemonId--;
-      this.loadPokemonData();
-    }
+  selectPokemon(pokemon: PokemonModel) {
+    this.currentPokemon = pokemon;
+    this.currentPokemonId = pokemon.getId();
+    this.searchResults = [];
+    this.searchTerm = '';
   }
 
-  nextPokemon(): void {
+  nextPokemon() {
     if (this.currentPokemonId < this.maxPokemonId) {
       this.currentPokemonId++;
       this.loadPokemonData();
     }
   }
 
+  prevPokemon() {
+    if (this.currentPokemonId > 1) {
+      this.currentPokemonId--;
+      this.loadPokemonData();
+    }
+  }
+
   isPrevDisabled(): boolean {
-    return this.currentPokemonId <= 1;
+    return this.currentPokemonId <= 1 || this.isLoading;
   }
 
   isNextDisabled(): boolean {
-    return this.currentPokemonId >= this.maxPokemonId;
-  }
-
-  private getPokemonName(id: number): string {
-    // Array con algunos nombres de ejemplo
-    const names = ['Bulbasaur', 'Ivysaur', 'Venusaur', 'Charmander', 'Charmeleon'];
-    return names[id - 1] || `Pokemon ${id}`;
-  }
-
-  private getPokemonType(id: number): string {
-    // Array con algunos tipos de ejemplo
-    const types = ['Grass', 'Fire', 'Water', 'Electric', 'Psychic'];
-    return types[Math.floor(Math.random() * types.length)];
+    return this.currentPokemonId >= this.maxPokemonId || this.isLoading;
   }
 }

@@ -1,16 +1,14 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { PokemonModel } from '../../Models/Pokemon';
 
 @Component({
   selector: 'app-graph',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.css']
 })
 export class GraphComponent implements OnChanges {
   @Input() pokemon?: PokemonModel;
+  stats: Array<{ name: string, value: number }> = [];
 
   ngOnChanges() {
     if (this.pokemon) {
@@ -19,8 +17,15 @@ export class GraphComponent implements OnChanges {
   }
 
   private updateStats() {
-    if (this.pokemon) {
-      // Actualizar las estadísticas en el gráfico
-    }
+    this.stats = [
+      { name: 'HP', value: this.pokemon!.getVida() },
+      { name: 'ATK', value: this.pokemon!.getAtaque() },
+      { name: 'DEF', value: this.pokemon!.getDefensa() }
+    ];
+  }
+
+  getStatPercentage(value: number): number {
+    const maxStat = 255; // Máximo valor posible de estadística
+    return (value / maxStat) * 100;
   }
 }

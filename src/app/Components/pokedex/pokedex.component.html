@@ -1,8 +1,8 @@
-<div class="pokemon-card" [class.loading]="isLoading">
-    <div class="shine-effect" *ngIf="showShineEffect"></div>
+<div class="pokemon-card" *ngIf="pokemon">
+    <div class="shine-effect" *ngIf="!isLoading"></div>
 
     <div class="pokemon-display">
-        <img [src]="imageUrl" [alt]="pokemon?.getNombre() || 'Pokemon'" class="pokemon-image" (load)="onImageLoad()"
+        <img [src]="pokemon.getImagen()" [alt]="pokemon.getNombre()" class="pokemon-image" (load)="onImageLoad()"
             [class.hidden]="isLoading">
 
         <div class="loading-spinner" *ngIf="isLoading">
@@ -10,35 +10,21 @@
         </div>
     </div>
 
-    <div class="pokemon-info" *ngIf="pokemon">
+    <div class="pokemon-info glass-effect" [class.hidden]="isLoading">
         <div class="pokemon-types">
-            <span class="type-badge" [class]="getTypeClass(pokemon.getTipo())">
+            <span class="type-badge" [ngClass]="'type-' + pokemon.getTipo().toLowerCase()">
                 {{pokemon.getTipo()}}
             </span>
         </div>
 
         <div class="stats-display">
-            <div class="stat-item">
-                <span class="stat-label">HP</span>
-                <div class="stat-bar">
-                    <div class="stat-fill" [style.width.%]="pokemon.getVida()">
-                    </div>
+            <div class="stat-item" *ngFor="let stat of ['HP', 'ATK', 'DEF']">
+                <div class="stat-label">
+                    <span>{{stat}}</span>
+                    <span>{{getStat(stat)}}</span>
                 </div>
-            </div>
-
-            <div class="stat-item">
-                <span class="stat-label">ATK</span>
                 <div class="stat-bar">
-                    <div class="stat-fill" [style.width.%]="pokemon.getAtaque()">
-                    </div>
-                </div>
-            </div>
-
-            <div class="stat-item">
-                <span class="stat-label">DEF</span>
-                <div class="stat-bar">
-                    <div class="stat-fill" [style.width.%]="pokemon.getDefensa()">
-                    </div>
+                    <div class="stat-fill" [style.width.%]="getStatPercentage(stat)"></div>
                 </div>
             </div>
         </div>

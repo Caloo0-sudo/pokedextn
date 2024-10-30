@@ -1,171 +1,101 @@
 .pokemon-card {
     position: relative;
-    width: 100%;
-    height: 100%;
-    perspective: 1000px;
-    transition: transform 0.6s;
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.pokemon-card:hover {
+    transform: translateY(-10px);
 }
 
 .pokemon-image {
-    width: 250px;
-    height: 250px;
-    object-fit: contain;
-    animation: floatAnimation 4s ease-in-out infinite;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    display: block;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+    animation: float 3s ease-in-out infinite;
 }
 
 .pokemon-info {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    padding: 20px;
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    text-align: center;
 }
 
-.stats-display {
+.pokemon-name {
+    font-size: 1.8em;
+    color: var(--text-color);
+    margin: 10px 0;
+    font-weight: 700;
+}
+
+.pokemon-types {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 15px;
-}
-
-.stat-bar {
-    height: 12px;
-    background: #f0f0f0;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.stat-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--pokedex-purple), var(--pokedex-blue));
-    transition: width 0.5s ease;
+    gap: 10px;
+    justify-content: center;
+    margin: 15px 0;
 }
 
 .type-badge {
-    padding: 8px 15px;
-    border-radius: 25px;
-    font-size: 14px;
-    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
     text-transform: uppercase;
-    margin: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
 }
-
-.type-fire {
-    background-color: #FF4422;
-    color: white;
-}
-
-.type-water {
-    background-color: #3399FF;
-    color: white;
-}
-
-.type-grass {
-    background-color: #77CC55;
-    color: white;
-}
-
-.type-electric {
-    background-color: #FFCC33;
-    color: black;
-}
-
-.type-psychic {
-    background-color: #FF5599;
-    color: white;
-}
-
-.type-normal {
-    background-color: #AAAA99;
-    color: white;
-}
-
-@keyframes floatAnimation {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-20px);
-    }
-}
-
-.shine-effect {
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.6),
-            transparent);
-    animation: shine 3s infinite;
-}
-
-@keyframes shine {
-    to {
-        left: 200%;
-    }
-}
-
-.loading-spinner {
-    width: 60px;
-    height: 60px;
-    border: 5px solid var(--pokedex-light-pink);
-    border-top: 5px solid var(--pokedex-purple);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-/* Al final de pokedex.component.css */
 
 @media (max-width: 768px) {
-    .pokemon-image {
-        width: 200px;
-        height: 200px;
-    }
-
-    .pokemon-info {
-        width: 95%;
-        padding: 15px;
-    }
-
-    .type-badge {
-        padding: 6px 12px;
-        font-size: 12px;
+    .pokemon-card {
+        max-width: 100%;
     }
 }
 
 @media (max-width: 480px) {
+    .pokemon-card {
+        padding: 15px;
+    }
+
     .pokemon-image {
         width: 150px;
         height: 150px;
     }
+}
 
-    .pokemon-info {
+/* Añadir al final de src/styles.css o src/app/Components/pokedex-view/pokedex-view.component.css */
+@media (max-width: 768px) {
+    .pokedex-container {
         padding: 10px;
     }
 
-    .stats-display {
-        gap: 8px;
+    .search-bar {
+        width: 100%;
+    }
+
+    .pokemon-display {
+        flex-direction: column;
+    }
+
+    .nav-button {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .pokemon-name {
+        font-size: 1.5rem;
+    }
+
+    .search-bar input {
+        font-size: 14px;
+    }
+
+    .pokemon-image {
+        width: 100px;
+        height: 100px;
     }
 }
