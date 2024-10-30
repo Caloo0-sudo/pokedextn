@@ -1,19 +1,18 @@
 /* Vista Principal */
 .pokedex-view {
     max-width: 576px;
-    height: 100vh;
-    background-color: #FFC1E3;
-    /* Fondo de la Pokédex */
-    border: 3px solid #F48FB1;
-    /* Borde de la Pokédex */
+    height: auto; /* Ajusta según el contenido */
+    background-color: #FFB3D9; /* Fondo de la Pokédex */
+    border: 3px solid #FF80AB; /* Borde de la Pokédex */
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    gap: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    gap: 20px; /* Espacio entre los elementos */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     position: relative;
+    overflow: hidden; /* Asegura que no sobresalgan los elementos */
 }
 
 /* Encabezado */
@@ -21,15 +20,21 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    animation: fadeIn 1s ease; /* Animación de aparición */
 }
 
 .icon {
     font-size: 2rem;
     color: #FFCA28;
+    transition: transform 0.3s; /* Efecto al pasar el ratón */
+}
+
+.icon:hover {
+    transform: rotate(360deg); /* Rota el icono al pasar el ratón */
 }
 
 .title {
-    font-size: 2rem;
+    font-size: 2.5rem; /* Tamaño de fuente más grande */
     font-weight: 700;
     font-family: 'Comic Sans MS', cursive, sans-serif;
     color: #AD1457;
@@ -41,27 +46,26 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin: 10px 0;
 }
 
 .nav-btn {
-    background-color: #F8BBD0;
-    border: 2px solid #F48FB1;
+    background-color: #FF80AB; /* Color de fondo más suave */
+    border: 2px solid #F48FB1; /* Color del borde */
     border-radius: 15px;
     padding: 10px 20px;
-    color: #880E4F;
+    color: white; /* Cambiado a blanco para mejor contraste */
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s; /* Transición suave */
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
 .nav-btn:hover:not([disabled]) {
-    background-color: #F06292;
-    color: white;
+    background-color: #F06292; /* Color de fondo al pasar el ratón */
+    transform: translateY(-3px); /* Efecto de movimiento al pasar el ratón */
 }
 
 /* Contenedor del Pokémon y Puntos */
@@ -71,11 +75,11 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    background-color: #FFF1F8;
-    /* Fondo del contenedor del Pokémon */
+    background-color: #FFF1F8; /* Fondo del contenedor del Pokémon */
     border-radius: 15px;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.5s ease; /* Animación de entrada */
 }
 
 /* Puntos Debajo del Pokémon */
@@ -87,21 +91,20 @@
 }
 
 .point {
-    background-color: #F06292;
+    background-color: #F06292; /* Color de los puntos */
     border: 2px solid white;
     border-radius: 50%;
-    width: 25px;
-    height: 25px;
+    width: 30px; /* Aumentado para un efecto más prominente */
+    height: 30px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    animation: pulse 2s infinite;
+    animation: pulse 2s infinite; /* Animación de pulsación */
 }
 
 /* Sección Gráfica */
 .graph {
     width: 100%;
-    height: 100%;
-    background-color: #FFEBF0;
-    /* Fondo de la sección gráfica */
+    height: auto; /* Ajusta según el contenido */
+    background-color: #FFEBF0; /* Fondo de la sección gráfica */
     border-top-right-radius: 50px;
     padding: 20px;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
@@ -117,17 +120,35 @@
     margin-right: 10px;
 }
 
-/* Animación suave para los puntos */
+/* Animaciones */
 @keyframes pulse {
     0% {
         transform: scale(1);
     }
-
     50% {
         transform: scale(1.2);
     }
-
     100% {
         transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
