@@ -70,4 +70,21 @@ export class PokedexViewComponent implements OnInit {
     this.searchTerm = '';
     this.searchResults = [];
   }
+
+  getPokemonImageUrl(): string {
+  // Implementa la lógica para obtener la URL de la imagen
+  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.currentPokemonId}.png`;
+}
+
+getPokemonName(id: number): string {
+  // Implementa la lógica para obtener el nombre del Pokémon
+  // Por ahora, retorna un nombre genérico
+  return `Pokemon ${id}`;
+}
+
+getPokemonType(id: number): string {
+  // Implementa la lógica para obtener el tipo del Pokémon
+  // Por ahora, retorna un tipo genérico
+  return 'Normal';
+}
 }
