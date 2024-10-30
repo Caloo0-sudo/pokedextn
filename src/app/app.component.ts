@@ -11,9 +11,9 @@ import { GraphComponent } from './Components/graph/graph.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [BrowserModule, FormsModule, CommonModule],
+  imports: [RouterOutlet, PokedexViewComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'] // Cambiado de styleUrl a styleUrls
 })
 export class AppComponent {
   title = 'myapp';
