@@ -1,4 +1,3 @@
-// src/app/Models/Pokemon.ts
 export class PokemonModel {
     constructor(
         private id: number,
@@ -8,10 +7,9 @@ export class PokemonModel {
         private ataque: number,
         private defensa: number,
         private tipo: string,
-        private descripcion?: string // Nuevo campo opcional
-    ) { }
+        private descripcion?: string // Campo opcional
+    ) {}
 
-    // Getters existentes...
     getId(): number {
         return this.id;
     }
