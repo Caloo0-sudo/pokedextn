@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PokemonModel } from '../../Models/Pokemon';
 
 @Component({
   selector: 'app-graph',
@@ -8,14 +9,18 @@ import { CommonModule } from '@angular/common';
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.css']
 })
-export class GraphComponent {
-  // Propiedades del Pokémon
-  idPokemon: string = "#0007";
-  nombrePokemon: string = 'Squirtle';
-  tipoPokemon: string = 'Agua';
-  
-  // Estadísticas (valores base sobre 100)
-  vidaPokemon: number = 100;
-  ataquePokemon: number = 55;
-  defensaPokemon: number = 50;
+export class GraphComponent implements OnChanges {
+  @Input() pokemon?: PokemonModel;
+
+  ngOnChanges() {
+    if (this.pokemon) {
+      this.updateStats();
+    }
+  }
+
+  private updateStats() {
+    if (this.pokemon) {
+      // Actualizar las estadísticas en el gráfico
+    }
+  }
 }

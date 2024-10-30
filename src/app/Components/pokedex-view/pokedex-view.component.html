@@ -1,34 +1,47 @@
-<div class="pokedex-view">
-    <!-- Encabezado con icono de Pikachu -->
+<div class="pokedex-view glass-effect">
     <header class="header">
-        <i class="fas fa-bolt icon"></i>
+        <i class="fas fa-heart icon"></i>
         <span class="title">Pokédex</span>
+        <i class="fas fa-star icon"></i>
     </header>
 
-    <!-- Botones de Navegación -->
-    <nav class="nav-buttons">
-        <button class="nav-btn" (click)="prevPokemon()" [disabled]="isPrevDisabled()">
-            <i class="fas fa-arrow-left"></i> Prev
-        </button>
-        <button class="nav-btn" (click)="nextPokemon()" [disabled]="isNextDisabled()">
-            Next <i class="fas fa-arrow-right"></i>
-        </button>
-    </nav>
-
-    <!-- Sección Principal con Contenedor de Imagen -->
-    <section class="pokedex">
-        <div class="pokemon-container">
-            <app-pokedex [imageUrl]="getPokemonImageUrl()"></app-pokedex>
-            <div class="points">
-                <span class="point"></span>
-                <span class="point"></span>
-            </div>
+    <section class="pokemon-container glass-effect">
+        <app-pokedex [imageUrl]="getPokemonImageUrl()"></app-pokedex>
+        <div class="points">
+            <span class="point"></span>
+            <span class="point"></span>
+            <span class="point"></span>
         </div>
     </section>
 
-    <!-- Sección Gráfica -->
-    <section class="graph">
-        <i class="fas fa-chart-bar graph-icon"></i>
-        <app-graph></app-graph>
-    </section>
+
+    <div class="pokedex-view glass-effect">
+
+
+        <nav class="nav-buttons">
+            <button class="nav-btn" (click)="prevPokemon()" [disabled]="isPrevDisabled()">
+                <i class="fas fa-arrow-left"></i> Prev
+            </button>
+            <button class="nav-btn" (click)="nextPokemon()" [disabled]="isNextDisabled()">
+                Next <i class="fas fa-arrow-right"></i>
+            </button>
+        </nav>
+
+        <div class="pokemon-name-display">
+            <h2 class="pokemon-current-name">{{currentPokemon?.getNombre()}}</h2>
+            <span class="pokemon-number">#{{currentPokemonId.toString().padStart(3, '0')}}</span>
+        </div>
+
+        <section class="pokemon-container glass-effect">
+            <app-pokedex [imageUrl]="getPokemonImageUrl()" [pokemon]="currentPokemon"></app-pokedex>
+            <div class="points">
+                <span class="point"></span>
+                <span class="point"></span>
+                <span class="point"></span>
+            </div>
+        </section>
+
+
+
+    </div>
 </div>

@@ -11,7 +11,6 @@
     </div>
 
     <div class="pokemon-info" *ngIf="pokemon">
-        <h2 class="pokemon-name">{{pokemon.getNombre()}}</h2>
         <div class="pokemon-types">
             <span class="type-badge" [class]="getTypeClass(pokemon.getTipo())">
                 {{pokemon.getTipo()}}

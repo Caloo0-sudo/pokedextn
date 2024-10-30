@@ -1,47 +1,43 @@
-/* Vista Principal */
 .pokedex-view {
     max-width: 576px;
-    height: auto; /* Ajusta según el contenido */
-    background-color: #FFB3D9; /* Fondo de la Pokédex */
-    border: 3px solid #FF80AB; /* Borde de la Pokédex */
-    border-radius: 20px;
+    background-color: var(--pokedex-light-pink);
+    border: 3px solid var(--pokedex-purple);
+    border-radius: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    gap: 20px; /* Espacio entre los elementos */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    gap: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
     position: relative;
-    overflow: hidden; /* Asegura que no sobresalgan los elementos */
+    overflow: hidden;
 }
 
-/* Encabezado */
 .header {
     display: flex;
     align-items: center;
     gap: 10px;
-    animation: fadeIn 1s ease; /* Animación de aparición */
+    animation: fadeIn 1s ease;
 }
 
 .icon {
-    font-size: 2rem;
-    color: #FFCA28;
-    transition: transform 0.3s; /* Efecto al pasar el ratón */
+    font-size: 2.5rem;
+    color: var(--pokedex-purple);
+    transition: transform 0.3s;
 }
 
 .icon:hover {
-    transform: rotate(360deg); /* Rota el icono al pasar el ratón */
+    transform: rotate(360deg);
 }
 
 .title {
-    font-size: 2.5rem; /* Tamaño de fuente más grande */
+    font-size: 2.5rem;
     font-weight: 700;
     font-family: 'Comic Sans MS', cursive, sans-serif;
-    color: #AD1457;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    color: var(--pokedex-purple);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Botones de Navegación */
 .nav-buttons {
     display: flex;
     justify-content: space-between;
@@ -49,85 +45,83 @@
 }
 
 .nav-btn {
-    background-color: #FF80AB; /* Color de fondo más suave */
-    border: 2px solid #F48FB1; /* Color del borde */
-    border-radius: 15px;
+    background-color: var(--pokedex-purple);
+    border: 2px solid #FF80AB;
+    border-radius: 20px;
     padding: 10px 20px;
-    color: white; /* Cambiado a blanco para mejor contraste */
+    color: white;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s; /* Transición suave */
+    transition: background-color 0.3s, transform 0.3s;
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
 .nav-btn:hover:not([disabled]) {
-    background-color: #F06292; /* Color de fondo al pasar el ratón */
-    transform: translateY(-3px); /* Efecto de movimiento al pasar el ratón */
+    background-color: #FF80AB;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Contenedor del Pokémon y Puntos */
 .pokemon-container {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    background-color: #FFF1F8; /* Fondo del contenedor del Pokémon */
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    animation: slideIn 0.5s ease; /* Animación de entrada */
+    gap: 15px;
+    background-color: white;
+    border-radius: 25px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.5s ease;
 }
 
-/* Puntos Debajo del Pokémon */
 .points {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .point {
-    background-color: #F06292; /* Color de los puntos */
+    background-color: var(--pokedex-purple);
     border: 2px solid white;
     border-radius: 50%;
-    width: 30px; /* Aumentado para un efecto más prominente */
-    height: 30px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    animation: pulse 2s infinite; /* Animación de pulsación */
+    width: 25px;
+    height: 25px;
+    box-shadow: 0 0 10px rgba(213, 0, 109, 0.5);
+    animation: pulse 2s infinite;
 }
 
-/* Sección Gráfica */
 .graph {
     width: 100%;
-    height: auto; /* Ajusta según el contenido */
-    background-color: #FFEBF0; /* Fondo de la sección gráfica */
+    background-color: var(--pokedex-light-pink);
     border-top-right-radius: 50px;
-    padding: 20px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    border-top-left-radius: 50px;
+    padding: 30px;
+    box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.1);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
-/* Icono de la gráfica */
 .graph-icon {
-    font-size: 2.5rem;
-    color: #AD1457;
-    margin-right: 10px;
+    font-size: 3rem;
+    color: var(--pokedex-purple);
+    margin-bottom: 20px;
 }
 
-/* Animaciones */
 @keyframes pulse {
     0% {
         transform: scale(1);
     }
+
     50% {
-        transform: scale(1.2);
+        transform: scale(1.1);
     }
+
     100% {
         transform: scale(1);
     }
@@ -137,6 +131,7 @@
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -147,8 +142,118 @@
         transform: translateY(20px);
         opacity: 0;
     }
+
     to {
         transform: translateY(0);
         opacity: 1;
+    }
+}
+
+.pokemon-name-display {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 15px 25px;
+    border-radius: 15px;
+    text-align: center;
+    margin: 15px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.pokemon-current-name {
+    color: #AD1457;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+    text-transform: capitalize;
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pokemon-number {
+    display: block;
+    color: #FF80AB;
+    font-size: 1rem;
+    margin-top: 5px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Animación para el cambio de nombre */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Media queries para el nombre del Pokémon */
+@media (max-width: 768px) {
+    .pokemon-current-name {
+        font-size: 1.2rem;
+    }
+
+    .pokemon-number {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .pokemon-current-name {
+        font-size: 1rem;
+    }
+
+    .pokemon-number {
+        font-size: 0.8rem;
+    }
+
+    .pokemon-name-display {
+        padding: 10px 15px;
+    }
+}
+
+/* Al final de pokedex-view.component.css */
+
+@media (max-width: 768px) {
+    .pokedex-view {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .nav-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .pokemon-container {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .icon {
+        font-size: 1.8rem;
     }
 }

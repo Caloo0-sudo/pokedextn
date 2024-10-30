@@ -1,39 +1,34 @@
-<div class="graph-container">
-    <!-- Información del Pokémon -->
+<div class="graph-container" *ngIf="pokemon">
     <div class="pokemon-info">
         <div class="pokemon-header">
-            <span class="pokemon-id">{{idPokemon}}</span>
-            <h2 class="pokemon-name">{{nombrePokemon}}</h2>
-            <span class="pokemon-type">{{tipoPokemon}}</span>
+            <span class="pokemon-id">#{{pokemon.getId().toString().padStart(3, '0')}}</span>
+            <h2 class="pokemon-name">{{pokemon.getNombre()}}</h2>
+            <span class="pokemon-type">{{pokemon.getTipo()}}</span>
         </div>
 
-        <!-- Estadísticas -->
         <div class="stats-container">
-            <!-- Vida -->
             <div class="stat-item">
                 <span class="stat-label">HP</span>
                 <div class="stat-bar">
-                    <div class="stat-fill" [style.width.%]="vidaPokemon"></div>
+                    <div class="stat-fill" [style.width.%]="pokemon.getVida()"></div>
                 </div>
-                <span class="stat-value">{{vidaPokemon}}</span>
+                <span class="stat-value">{{pokemon.getVida()}}</span>
             </div>
 
-            <!-- Ataque -->
             <div class="stat-item">
                 <span class="stat-label">ATK</span>
                 <div class="stat-bar">
-                    <div class="stat-fill" [style.width.%]="ataquePokemon"></div>
+                    <div class="stat-fill" [style.width.%]="pokemon.getAtaque()"></div>
                 </div>
-                <span class="stat-value">{{ataquePokemon}}</span>
+                <span class="stat-value">{{pokemon.getAtaque()}}</span>
             </div>
 
-            <!-- Defensa -->
             <div class="stat-item">
                 <span class="stat-label">DEF</span>
                 <div class="stat-bar">
-                    <div class="stat-fill" [style.width.%]="defensaPokemon"></div>
+                    <div class="stat-fill" [style.width.%]="pokemon.getDefensa()"></div>
                 </div>
-                <span class="stat-value">{{defensaPokemon}}</span>
+                <span class="stat-value">{{pokemon.getDefensa()}}</span>
             </div>
         </div>
     </div>

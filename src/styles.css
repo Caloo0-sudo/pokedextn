@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
-    --pokedex-red: #DC0A2D;
+    --pokedex-pink: #FFB3D9;
+    --pokedex-light-pink: #FFEBF0;
+    --pokedex-purple: #D5006D;
     --pokedex-blue: #0075BE;
     --screen-green: #98CB98;
 }
@@ -13,8 +16,8 @@
 }
 
 body {
-    font-family: 'Press Start 2P', cursive;
-    background: linear-gradient(135deg, #1a1a1a, #4a4a4a);
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, var(--pokedex-light-pink), var(--pokedex-pink));
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -26,7 +29,7 @@ body {
     width: 50px;
     height: 50px;
     border: 5px solid #f3f3f3;
-    border-top: 5px solid var(--pokedex-red);
+    border-top: 5px solid var(--pokedex-purple);
     border-radius: 50%;
     animation: spin 1s linear infinite;
     position: absolute;
@@ -54,7 +57,6 @@ body {
     opacity: 1;
 }
 
-/* Efectos de botones */
 .button-3d {
     transform-style: preserve-3d;
     transition: transform 0.1s ease;
@@ -64,11 +66,10 @@ body {
     transform: translateY(4px);
 }
 
-/* Efectos de brillos y reflejos */
 .glass-effect {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 /* Animaciones de transición */
@@ -81,4 +82,107 @@ body {
     opacity: 1;
     transform: translateY(0);
     transition: opacity 300ms, transform 300ms;
+}
+
+/* Efectos de brillo y destellos */
+.sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: white;
+    animation: twinkle 1.5s infinite;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Efecto de resplandor para botones */
+.glow-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.glow-effect::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle,
+            rgba(255, 255, 255, 0.8) 0%,
+            transparent 70%);
+    transform: rotate(45deg);
+    animation: glow 3s infinite;
+}
+
+@keyframes glow {
+    0% {
+        transform: rotate(45deg) translateX(-100%);
+    }
+
+    100% {
+        transform: rotate(45deg) translateX(100%);
+    }
+}
+
+/* Mejoras en la tipografía */
+h1,
+h2,
+h3 {
+    font-family: 'Press Start 2P', cursive;
+    letter-spacing: 1px;
+}
+
+/* Efectos hover mejorados */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(213, 0, 109, 0.2);
+}
+
+/* Efectos de transición suave */
+.smooth-transition {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Media Queries Globales */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .button-3d {
+        padding: 8px 16px;
+    }
+
+    .glass-effect {
+        backdrop-filter: blur(8px);
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+
+    .loading-spinner {
+        width: 40px;
+        height: 40px;
+    }
 }

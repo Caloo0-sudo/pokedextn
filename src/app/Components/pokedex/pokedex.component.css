@@ -7,52 +7,53 @@
 }
 
 .pokemon-image {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     object-fit: contain;
-    animation: floatAnimation 3s ease-in-out infinite;
+    animation: floatAnimation 4s ease-in-out infinite;
 }
 
 .pokemon-info {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    padding: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 20px;
     position: absolute;
-    bottom: 20px;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .stats-display {
     display: flex;
-    gap: 10px;
-    margin-top: 10px;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
 }
 
 .stat-bar {
-    flex: 1;
-    height: 8px;
-    background: #ddd;
-    border-radius: 4px;
+    height: 12px;
+    background: #f0f0f0;
+    border-radius: 6px;
     overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .stat-fill {
     height: 100%;
-    background: linear-gradient(90deg, #ff0000, #00ff00);
-    transition: width 0.3s ease;
+    background: linear-gradient(90deg, var(--pokedex-purple), var(--pokedex-blue));
+    transition: width 0.5s ease;
 }
 
-/* Tipos de Pokémon */
 .type-badge {
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 12px;
+    padding: 8px 15px;
+    border-radius: 25px;
+    font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
-    margin: 0 5px;
+    margin: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .type-fire {
@@ -101,13 +102,13 @@
     position: absolute;
     top: 0;
     left: -100%;
-    width: 50%;
+    width: 100%;
     height: 100%;
     background: linear-gradient(90deg,
             transparent,
-            rgba(255, 255, 255, 0.4),
+            rgba(255, 255, 255, 0.6),
             transparent);
-    animation: shine 2s infinite;
+    animation: shine 3s infinite;
 }
 
 @keyframes shine {
@@ -116,11 +117,55 @@
     }
 }
 
-img {
-    width: 200px;
-    /* o el tamaño que prefieras */
-    height: 200px;
-    object-fit: contain;
-    image-rendering: pixelated;
-    /* para sprites pixelados */
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid var(--pokedex-light-pink);
+    border-top: 5px solid var(--pokedex-purple);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Al final de pokedex.component.css */
+
+@media (max-width: 768px) {
+    .pokemon-image {
+        width: 200px;
+        height: 200px;
+    }
+
+    .pokemon-info {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .type-badge {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pokemon-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .pokemon-info {
+        padding: 10px;
+    }
+
+    .stats-display {
+        gap: 8px;
+    }
 }
