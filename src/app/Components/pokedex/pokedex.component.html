@@ -1,0 +1,36 @@
+<div class="pokemon-card" *ngIf="pokemon">
+    <div class="shine-effect" *ngIf="!isLoading"></div>
+
+    <div class="pokemon-display">
+        <img [src]="imageUrl" [alt]="pokemon.getNombre()" class="pokemon-image" (load)="onImageLoad()"
+            [class.hidden]="isLoading">
+
+        <div class="loading-spinner" *ngIf="isLoading">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <div class="pokemon-info glass-effect" [class.hidden]="isLoading">
+        <h2 class="pokemon-name">{{pokemon.getNombre()}}</h2>
+        <div class="pokemon-types">
+            <span class="type-badge" [ngClass]="getTypeClass(pokemon.getTipo())">
+                {{pokemon.getTipo()}}
+            </span>
+        </div>
+
+        <div class="stats-display">
+            <div class="stat-item">
+                <span class="stat-label">HP</span>
+                <span class="stat-value">{{pokemon.getVida()}}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">ATK</span>
+                <span class="stat-value">{{pokemon.getAtaque()}}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">DEF</span>
+                <span class="stat-value">{{pokemon.getDefensa()}}</span>
+            </div>
+        </div>
+    </div>
+</div>

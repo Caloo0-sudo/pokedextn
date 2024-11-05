@@ -1,0 +1,12 @@
+<div class="graph-container" *ngIf="pokemon">
+    <h3>Estadísticas</h3>
+    <div class="stats-container">
+        <div class="stat-item" *ngFor="let stat of stats">
+            <span class="stat-label">{{stat.name}}</span>
+            <div class="stat-bar">
+                <div class="stat-fill" [style.width.%]="getStatPercentage(stat.value)"></div>
+            </div>
+            <span class="stat-value">{{stat.value}}</span>
+        </div>
+    </div>
+</div>

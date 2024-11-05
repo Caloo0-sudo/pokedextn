@@ -1,0 +1,46 @@
+<div class="pokedex-view glass-effect">
+    <header class="header">
+        <i class="fas fa-heart icon"></i>
+        <h1 class="title">Pokédex</h1>
+        <i class="fas fa-star icon"></i>
+    </header>
+
+    <div class="search-container">
+        <input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Buscar Pokémon..."
+            class="search-input">
+        <div class="search-results" *ngIf="searchResults.length > 0">
+            <div class="search-result-item hover-lift" *ngFor="let pokemon of searchResults"
+                (click)="selectPokemon(pokemon)">
+                <img [src]="pokemon.getImagen()" [alt]="pokemon.getNombre()">
+                <span>{{pokemon.getNombre()}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="pokemon-name-display glass-effect">
+        <h2 class="pokemon-current-name">{{currentPokemon?.getNombre()}}</h2>
+        <span class="pokemon-number">#{{currentPokemonId.toString().padStart(3, '0')}}</span>
+    </div>
+
+    <section class="pokemon-container glass-effect">
+        <app-pokedex [imageUrl]="getPokemonImageUrl()" [pokemon]="currentPokemon"></app-pokedex>
+        <div class="points">
+            <span class="point"></span>
+            <span class="point"></span>
+            <span class="point"></span>
+        </div>
+    </section>
+
+    <app-graph [pokemon]="currentPokemon" [class.hidden]="isLoading"></app-graph>
+
+    <nav class="nav-buttons">
+        <button class="nav-btn button-3d" (click)="prevPokemon()" [disabled]="isPrevDisabled()">
+            <i class="fas fa-chevron-left"></i> Anterior
+        </button>
+        <button class="nav-btn button-3d" (click)="nextPokemon()" [disabled]="isNextDisabled()">
+            Siguiente <i class="fas fa-chevron-right"></i>
+        </button>
+    </nav>
+
+    <div class="loading-spinner" *ngIf="isLoading"></div>
+</div>
