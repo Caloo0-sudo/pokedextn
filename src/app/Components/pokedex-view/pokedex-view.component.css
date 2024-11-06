@@ -240,7 +240,7 @@
     }
 }
 
-/* Estilos responsivos adicionales */
+/* Estilos responsivos adicionales-----*/
 @media (max-width: 768px) {
     .main-led {
         width: 15px;
