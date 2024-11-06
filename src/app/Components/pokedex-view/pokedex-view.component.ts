@@ -6,8 +6,13 @@ import { PokedexComponent } from '../pokedex/pokedex.component';
 import { GraphComponent } from '../graph/graph.component';
 import { FormsModule } from '@angular/forms';
 import { PokemonModel } from '../../Models/Pokemon';
-import { forkJoin, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { forkJoin, Observable, of } from 'rxjs';
+import { map, switchMap, catchError } from 'rxjs/operators';
+
+interface PokemonListResponse {
+  count: number;
+  results: Array<{ name: string, url: string }>;
+}
 
 @Component({
   selector: 'app-pokedex-view',
@@ -19,7 +24,7 @@ import { map } from 'rxjs/operators';
 export class PokedexViewComponent implements OnInit {
   currentPokemon?: PokemonModel;
   currentPokemonId: number = 1;
-  maxPokemonId: number = 151;
+  maxPokemonId: number = 0;
   isLoading: boolean = true;
   searchTerm: string = '';
   searchResults: PokemonModel[] = [];
@@ -30,7 +35,16 @@ export class PokedexViewComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.loadPokemonData();
+    this.getTotalPokemonCount().subscribe(count => {
+      this.maxPokemonId = count;
+      this.loadPokemonData();
+    });
+  }
+
+  getTotalPokemonCount(): Observable<number> {
+    return this.http.get<PokemonListResponse>(`${this.baseUrl}?limit=1`).pipe(
+      map(response => response.count)
+    );
   }
 
   loadPokemonData(): void {
@@ -59,6 +73,10 @@ export class PokedexViewComponent implements OnInit {
           response.stats.find((s: any) => s.stat.name === 'defense').base_stat,
           response.types[0].type.name.toUpperCase()
         );
+      }),
+      catchError(error => {
+        console.error('Error fetching Pokemon:', error);
+        return of(new PokemonModel(id, 'Unknown', '', 0, 0, 0, 'UNKNOWN'));
       })
     );
   }
@@ -69,17 +87,24 @@ export class PokedexViewComponent implements OnInit {
 
   onSearch() {
     if (this.searchTerm.length > 0) {
-      const searches = Array.from({ length: 151 }, (_, i) => i + 1)
-        .map(id => this.getPokemon(id));
-
-      forkJoin(searches).subscribe(pokemons => {
-        this.searchResults = pokemons
-          .filter(pokemon => pokemon.getNombre().toLowerCase().includes(this.searchTerm.toLowerCase()))
-          .slice(0, 5);
+      this.http.get<PokemonListResponse>(`${this.baseUrl}?limit=${this.maxPokemonId}`).pipe(
+        switchMap(response => {
+          const filteredResults = response.results
+            .filter(pokemon => pokemon.name.includes(this.searchTerm.toLowerCase()))
+            .slice(0, 5);
+          return forkJoin(filteredResults.map(pokemon => this.getPokemon(this.getIdFromUrl(pokemon.url))));
+        })
+      ).subscribe(pokemons => {
+        this.searchResults = pokemons;
       });
     } else {
       this.searchResults = [];
     }
+  }
+
+  private getIdFromUrl(url: string): number {
+    const parts = url.split('/');
+    return parseInt(parts[parts.length - 2]);
   }
 
   prevPokemon() {
