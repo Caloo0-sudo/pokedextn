@@ -1,46 +1,98 @@
-<div class="pokedex-view glass-effect">
-    <header class="header">
-        <i class="fas fa-heart icon"></i>
-        <h1 class="title">Pokédex</h1>
-        <i class="fas fa-star icon"></i>
+<div class="pokedex-view retro-container">
+    <!-- Decoraciones de esquina -->
+    <div class="corner-decoration top-left"></div>
+    <div class="corner-decoration top-right"></div>
+    <div class="corner-decoration bottom-left"></div>
+    <div class="corner-decoration bottom-right"></div>
+
+    <!-- Panel superior con LEDs -->
+    <div class="led-panel">
+        <div class="led-light main-led"></div>
+        <div class="led-group">
+            <div class="led-light small-led red"></div>
+            <div class="led-light small-led yellow"></div>
+            <div class="led-light small-led green"></div>
+        </div>
+    </div>
+
+    <header class="retro-header">
+        <div class="header-decoration left"></div>
+        <h1 class="pixel-text">Pokédex</h1>
+        <div class="header-decoration right"></div>
     </header>
 
-    <div class="search-container">
-        <input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Buscar Pokémon..."
-            class="search-input">
-        <div class="search-results" *ngIf="searchResults.length > 0">
-            <div class="search-result-item hover-lift" *ngFor="let pokemon of searchResults"
-                (click)="selectPokemon(pokemon)">
-                <img [src]="pokemon.getImagen()" [alt]="pokemon.getNombre()">
-                <span>{{pokemon.getNombre()}}</span>
+    <!-- Barra de búsqueda mejorada -->
+    <div class="search-module">
+        <div class="search-border">
+            <input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="BUSCAR..."
+                class="retro-input">
+            <div class="search-indicator"></div>
+        </div>
+        <!-- Resultados con estilo retro -->
+        <div class="search-results retro-panel" *ngIf="searchResults.length > 0">
+            <div class="result-scroll">
+                <div class="search-result-item pixel-border" *ngFor="let pokemon of searchResults"
+                    (click)="selectPokemon(pokemon)">
+                    <img [src]="pokemon.getImagen()" [alt]="pokemon.getNombre()" class="result-sprite">
+                    <span class="result-name">{{pokemon.getNombre()}}</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="pokemon-name-display glass-effect">
-        <h2 class="pokemon-current-name">{{currentPokemon?.getNombre()}}</h2>
-        <span class="pokemon-number">#{{currentPokemonId.toString().padStart(3, '0')}}</span>
+    <!-- Display principal -->
+    <div class="main-display retro-screen">
+        <div class="scan-lines"></div>
+        <div class="screen-glare"></div>
+
+        <!-- Información del Pokémon actual -->
+        <div class="pokemon-info-display" [class.hidden]="isLoading">
+            <div class="pokemon-id-badge">
+                <span class="id-label">ID</span>
+                <span class="id-number">#{{currentPokemonId.toString().padStart(3, '0')}}</span>
+            </div>
+
+            <h2 class="pokemon-name pixel-text">{{currentPokemon?.getNombre()}}</h2>
+
+            <div class="pokemon-sprite-container">
+                <app-pokedex [imageUrl]="getPokemonImageUrl()" [pokemon]="currentPokemon">
+                </app-pokedex>
+            </div>
+        </div>
     </div>
 
-    <section class="pokemon-container glass-effect">
-        <app-pokedex [imageUrl]="getPokemonImageUrl()" [pokemon]="currentPokemon"></app-pokedex>
-        <div class="points">
-            <span class="point"></span>
-            <span class="point"></span>
-            <span class="point"></span>
-        </div>
-    </section>
+    <!-- Panel de estadísticas -->
+    <div class="stats-panel retro-panel">
+        <app-graph [pokemon]="currentPokemon" [class.hidden]="isLoading">
+        </app-graph>
+    </div>
 
-    <app-graph [pokemon]="currentPokemon" [class.hidden]="isLoading"></app-graph>
-
-    <nav class="nav-buttons">
-        <button class="nav-btn button-3d" (click)="prevPokemon()" [disabled]="isPrevDisabled()">
-            <i class="fas fa-chevron-left"></i> Anterior
+    <!-- Controles de navegación -->
+    <nav class="navigation-controls">
+        <button class="nav-btn retro-btn" (click)="prevPokemon()" [disabled]="isPrevDisabled()">
+            <span class="btn-arrow">←</span>
+            <span class="btn-text">ANTERIOR</span>
         </button>
-        <button class="nav-btn button-3d" (click)="nextPokemon()" [disabled]="isNextDisabled()">
-            Siguiente <i class="fas fa-chevron-right"></i>
+
+        <div class="control-pad">
+            <div class="dpad">
+                <button class="dpad-btn up"></button>
+                <button class="dpad-btn right"></button>
+                <button class="dpad-btn down"></button>
+                <button class="dpad-btn left"></button>
+                <div class="dpad-center"></div>
+            </div>
+        </div>
+
+        <button class="nav-btn retro-btn" (click)="nextPokemon()" [disabled]="isNextDisabled()">
+            <span class="btn-text">SIGUIENTE</span>
+            <span class="btn-arrow">→</span>
         </button>
     </nav>
 
-    <div class="loading-spinner" *ngIf="isLoading"></div>
+    <!-- Indicador de carga -->
+    <div class="loading-indicator" *ngIf="isLoading">
+        <div class="loading-pixel"></div>
+        <div class="loading-text">CARGANDO...</div>
+    </div>
 </div>

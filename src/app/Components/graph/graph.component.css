@@ -1,70 +1,61 @@
 .graph-container {
-    margin-top: 30px;
-    padding: 20px;
-    border-radius: 15px;
     background: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 6px solid var(--retro-shadow);
+    padding: 20px;
+    margin-top: 20px;
+    position: relative;
 }
 
 .stats-container {
-    margin-top: 20px;
-}
-
-.stat-item {
-    margin: 15px 0;
     display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.stat-label {
-    min-width: 50px;
-    font-weight: bold;
-    color: var(--secondary-color);
+    flex-direction: column;
+    gap: 15px;
 }
 
 .stat-bar {
-    flex-grow: 1;
-    height: 10px;
-    background: #f0f0f0;
-    border-radius: 5px;
+    position: relative;
+    height: 24px;
+    background: var(--retro-cream);
+    border: 4px solid var(--retro-shadow);
     overflow: hidden;
 }
 
 .stat-fill {
     height: 100%;
-    background: var(--gradient-primary);
-    transition: width 0.5s ease-out;
+    background: var(--retro-pink);
+    transition: width 0.5s steps(20);
+    position: relative;
+}
+
+/* Efecto de segmentos en las barras */
+.stat-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(90deg,
+            transparent 0%,
+            transparent 50%,
+            rgba(0, 0, 0, 0.1) 50%,
+            rgba(0, 0, 0, 0.1) 100%);
+    background-size: 8px 100%;
+}
+
+.stat-label {
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: var(--retro-shadow);
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .stat-value {
-    min-width: 40px;
-    text-align: right;
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-@media (max-width: 768px) {
-    .graph-container {
-        margin-top: 20px;
-        padding: 15px;
-    }
-
-    .stat-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-    }
-
-    .stat-label {
-        min-width: auto;
-    }
-
-    .stat-bar {
-        width: 100%;
-    }
-
-    .stat-value {
-        align-self: flex-end;
-    }
+    background: var(--retro-pink-dark);
+    color: white;
+    padding: 2px 6px;
+    border: 2px solid var(--retro-shadow);
 }

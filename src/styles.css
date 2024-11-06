@@ -1,98 +1,362 @@
-/* styles.css */
+/* Importar fuente pixelada */
+@font-face {
+    font-family: 'PressStart2P';
+    src: url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+}
+
 :root {
-    --primary-color: #FF5350;
-    --secondary-color: #2E3154;
-    --accent-color: #4CAF50;
-    --background-color: #F5F5F5;
-    --text-color: #333333;
-    --shadow-color: rgba(0, 0, 0, 0.2);
-    --gradient-primary: linear-gradient(135deg, #FF5350, #FF7F7D);
-    --gradient-secondary: linear-gradient(135deg, #2E3154, #454878);
+    /* Paleta de colores retro */
+    --retro-pink-light: #FFB7B7;
+    --retro-pink: #FF9E9E;
+    --retro-pink-dark: #FF7F7F;
+    --retro-cream: #FFF1E6;
+    --retro-blue: #7FB8FF;
+    --retro-shadow: #4A4A4A;
+
+    /* Gradientes */
+    --gradient-retro: linear-gradient(45deg,
+            var(--retro-pink-light) 0%,
+            var(--retro-pink) 50%,
+            var(--retro-pink-dark) 100%);
+
+    /* Bordes pixelados */
+    --pixel-border:
+        -4px -4px var(--retro-shadow),
+        4px 4px var(--retro-shadow),
+        -4px 4px var(--retro-shadow),
+        4px -4px var(--retro-shadow);
 }
 
+/* Estilos globales retro */
 body {
-    background: var(--background-color);
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: 'PressStart2P', monospace;
+    background: var(--retro-cream);
+    image-rendering: pixelated;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+/* Clases de utilidad retro */
+.pixel-border {
+    border: 4px solid var(--retro-shadow);
+    box-shadow: var(--pixel-border);
+    position: relative;
 }
 
-/* Animaciones globales */
-@keyframes fadeIn {
-    from {
+.pixel-border::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 2px solid var(--retro-shadow);
+    pointer-events: none;
+}
+
+/* Decoraciones retro */
+.retro-decoration {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--retro-pink);
+    border: 2px solid var(--retro-shadow);
+}
+
+.decoration-tl {
+    top: 10px;
+    left: 10px;
+}
+
+.decoration-tr {
+    top: 10px;
+    right: 10px;
+}
+
+.decoration-bl {
+    bottom: 10px;
+    left: 10px;
+}
+
+.decoration-br {
+    bottom: 10px;
+    right: 10px;
+}
+
+/* Indicador LED retro */
+/* Indicador LED retro */
+.led-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--retro-blue);
+    border: 2px solid var(--retro-shadow);
+    animation: blink 1s infinite;
+    box-shadow: 0 0 10px var(--retro-blue);
+}
+
+/* Grid de puntos retro */
+.dot-grid {
+    background-image: radial-gradient(var(--retro-shadow) 1px,
+            transparent 1px);
+    background-size: 8px 8px;
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+/* Líneas de escáner retro */
+.scan-lines {
+    background: linear-gradient(to bottom,
+            transparent 50%,
+            rgba(0, 0, 0, 0.1) 51%);
+    background-size: 100% 4px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+/* Efectos CRT */
+.crt-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.crt-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%,
+            rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    animation: scanEffect 10s linear infinite;
+}
+
+.crt-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 16, 16, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    animation: screenNoise 0.1s infinite;
+}
+
+.pixel-image {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.pixel-shadow {
+    position: relative;
+}
+
+.pixel-shadow::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 100%;
+    height: 100%;
+    background: var(--retro-shadow);
+    z-index: -1;
+}
+
+/* Efecto de brillo pixelado */
+.pixel-shine {
+    position: relative;
+    overflow: hidden;
+}
+
+.pixel-shine::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.4) 50%,
+            transparent 100%);
+    transform: rotate(45deg);
+    animation: shineEffect 3s infinite;
+}
+
+/* Botones retro */
+.retro-button {
+    background: var(--retro-pink);
+    border: 4px solid var(--retro-shadow);
+    padding: 10px 20px;
+    font-family: 'PressStart2P';
+    font-size: 14px;
+    color: var(--retro-shadow);
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.1s;
+}
+
+.retro-button:active {
+    transform: translateY(4px);
+}
+
+/* Input retro */
+.retro-input {
+    background: white;
+    border: 4px solid var(--retro-shadow);
+    padding: 10px;
+    font-family: 'PressStart2P';
+    font-size: 14px;
+    color: var(--retro-shadow);
+    width: 100%;
+}
+
+.retro-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--retro-pink-light);
+}
+
+/* Select retro */
+.retro-select {
+    appearance: none;
+    background: white;
+    border: 4px solid var(--retro-shadow);
+    padding: 10px;
+    font-family: 'PressStart2P';
+    font-size: 14px;
+    color: var(--retro-shadow);
+    cursor: pointer;
+}
+
+.retro-select::after {
+    content: '▼';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Animaciones pixeladas */
+@keyframes pixelFadeIn {
+    0% {
         opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-/* Añadir al final de src/styles.css */
-
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0);
+        transform: scale(0.8);
     }
 
     50% {
-        transform: translateY(-20px);
-    }
-}
-
-@keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(255, 83, 80, 0.4);
-    }
-
-    70% {
-        box-shadow: 0 0 0 10px rgba(255, 83, 80, 0);
+        opacity: 0.5;
+        transform: scale(1.1);
     }
 
     100% {
-        box-shadow: 0 0 0 0 rgba(255, 83, 80, 0);
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
-@keyframes shine {
-    to {
-        left: 100%;
+@keyframes scanline {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100%);
     }
 }
 
-.shine {
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+    }
+
+    60% {
+        transform: translate(2px, 2px);
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+.pokemon-image {
+    animation: pixelFadeIn 0.3s steps(5) forwards;
+}
+
+.scanline {
     position: absolute;
-    top: 0;
-    left: -100%;
     width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.3),
-            transparent);
-    animation: shine 3s infinite;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    animation: scanline 2s linear infinite;
 }
+
+.glitch-effect:hover {
+    animation: glitch 0.2s steps(2) infinite;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --pixel-border-size: 3px;
+    }
+
+    .pokemon-card {
+        padding: 15px;
+    }
+
+    .pokemon-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .stats-display {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nav-buttons {
+        flex-direction: column;
+    }
+
+    .retro-button {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 18px;
+    }
+
+    .pokemon-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .stats-display {
+        grid-template-columns: 1fr;
+    }
+}
+
