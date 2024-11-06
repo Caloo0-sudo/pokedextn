@@ -161,7 +161,7 @@
     animation: blink 2s infinite;
 }
 
-/* Pantalla principal */
+
 .retro-screen {
     position: relative;
     background: var(--retro-cream);
